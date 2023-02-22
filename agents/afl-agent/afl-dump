@@ -1,0 +1,35 @@
+#!/bin/bash
+
+KEYS=(
+"last_update"
+"cycles_done"
+"cur_path"
+"paths_total"
+"pending_total"
+"pending_favs"
+"bitmap_cvg"
+"unique_crashes"
+"unique_hangs"
+"max_depth"
+"execs_per_sec")
+input="./output/fuzzer_stats"
+output="./output/plot_data"
+
+VALUES=()
+
+for key in ${KEYS[@]}; do
+    while IFS= read -r line; do
+        if [[ $line == $key* ]]; then
+            VALUES+=( `echo $line | awk '{print $3}'` )
+            break
+        fi
+    done < $input
+done
+
+for i in ${!VALUES[@]}; do
+    if [[ $i -gt 0 ]]; then
+        echo -n ", " >> $output
+    fi
+    echo -n "${VALUES[$i]}" >> $output
+done
+echo >> $output

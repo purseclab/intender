@@ -1,0 +1,55 @@
+{
+    "name": "h2h-modify",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 2
+        }
+    },
+    "configActions": [
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "26:01:17:60:43:32/None",
+                    "two": "B2:46:C9:AA:58:BA/None"
+                }
+            }
+        }
+    ],
+    "actions": [
+        {
+            "action": "mod-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "26:01:17:60:43:32/None",
+                    "two": "D6:FB:81:91:50:6F/None"
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        }
+    ]
+}

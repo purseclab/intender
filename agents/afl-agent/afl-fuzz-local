@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Figure out script absolute path
+pushd `dirname $0` > /dev/null
+BIN_DIR=`pwd`
+popd > /dev/null
+
+afl_options=""
+mem_limit="4096"
+input_dir="/tmp/ifuzzer/seed"
+output_dir="$BIN_DIR/output"
+target="$BIN_DIR/afl-intender"
+AFL_FUZZ="$AFL_DIR/afl-fuzz"
+
+# Set environment variables for AFL
+export AFL_SKIP_BIN_CHECK=1
+export AFL_NO_AFFINITY=1
+export AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
+export AFL_SKIP_CPUFREQ=1
+
+afl_options="$afl_options -i $input_dir"
+afl_options="$afl_options -o $output_dir"
+afl_options="$afl_options -m $mem_limit"
+afl_options="$afl_options -T intender"
+afl_options="$afl_options -t 50+"
+
+exec "$AFL_FUZZ" $afl_options "$target" -a -l @@

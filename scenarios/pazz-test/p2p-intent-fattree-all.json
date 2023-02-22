@@ -1,0 +1,80 @@
+{
+    "name": "p2p-intent",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 4
+        }
+    },
+    "actions": [
+        {
+            "action": "add-intent",
+            "exec-mode":"async",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "PointToPointIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "selector": {
+                        "criteria": [
+                            {"type": "ETH_TYPE", "ethType": "0x800"},
+                            {"type": "IPV4_DST", "ip": "10.0.0.0/24"}
+                        ]
+                    },
+                    "ingressPoint": {"device": "of:0000000000000302", "port": "4"},
+                    "egressPoint":  {"device": "of:0000000000000303", "port": "3"}
+                }
+            }
+        },
+        {
+            "action": "add-intent",
+            "exec-mode":"async",
+            "content": {
+                "id": "B",
+                "controller": "onos",
+                "intent": {
+                    "type": "PointToPointIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "selector": {
+                        "criteria": [
+                            {"type": "ETH_TYPE", "ethType": "0x800"},
+                            {"type": "IPV4_DST", "ip": "11.0.0.0/24"}
+                        ]
+                    },
+                    "ingressPoint": {"device": "of:0000000000000306", "port": "4"},
+                    "egressPoint":  {"device": "of:0000000000000303", "port": "3"}
+                }
+            }
+        },
+        {
+            "action": "add-intent",
+            "exec-mode":"async",
+            "content": {
+                "id": "C",
+                "controller": "onos",
+                "intent": {
+                    "type": "PointToPointIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "selector": {
+                        "criteria": [
+                            {"type": "ETH_TYPE", "ethType": "0x800"},
+                            {"type": "IPV4_DST", "ip": "12.0.0.0/24"}
+                        ]
+                    },
+                    "ingressPoint": {"device": "of:0000000000000308", "port": "4"},
+                    "egressPoint":  {"device": "of:0000000000000303", "port": "3"}
+                }
+            }
+        },
+        {"action": "cp-verify-intent", "content": {"intentId": "A"}},
+        {"action": "cp-verify-intent", "content": {"intentId": "B"}},
+        {"action": "cp-verify-intent", "content": {"intentId": "C"}},
+        {"action": "dp-verify-intent"}
+    ]
+}

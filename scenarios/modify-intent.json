@@ -1,0 +1,50 @@
+{
+    "name": "modify-intent",
+    "actions": [
+        {
+            "action": "add-intent",
+            "exec-mode": "synchronous",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "46:E4:3C:A4:17:C8/-1",
+                    "two": "08:00:27:56:8a:15/-1"
+                }
+            }
+        },
+        {
+            "action": "sleep",
+            "content": {
+                "time_ms": 100
+            }
+        },
+        {
+            "action": "mod-intent",
+            "content": {
+                "oldId": "A",
+                "newId": "B",
+                "intent": {
+                    "one": "46:E4:3C:A4:17:C7/-1"
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A",
+                "expect": true
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A",
+                "expect": true
+            }
+        }
+    ]
+}

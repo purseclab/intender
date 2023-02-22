@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Figure out script absolute path
+pushd `dirname $0` > /dev/null
+BIN_DIR=`pwd`
+popd > /dev/null
+
+ROOT_DIR=`dirname $BIN_DIR`
+
+tmpdir=$(mktemp -d /tmp/ibn-fuzzer.XXX)
+
+a2j="$tmpdir/a2j"
+j2a="$tmpdir/j2a"
+afl_log="$tmpdir/afl.log"
+
+mkfifo "$a2j"
+mkfifo "$j2a"
+
+# Run the AFL driver in the background
+#"$ROOT_DIR/scripts/jqf-driver.sh" \
+#  $driver $class $method $input $a2j $j2a \
+#  1> $java_log 2>&1 &
+
+# Run the proxy
+exec "$ROOT_DIR/bin/afl-proxy" $a2j $j2a $afl_log

@@ -1,0 +1,60 @@
+{
+    "name": "p2p-purge",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 2
+        }
+    },
+    "configActions": [
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "PointToPointIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "ingressPoint": {
+                        "port": "3",
+                        "device": "of:0000000000000203"
+                    },
+                    "egressPoint": {
+                        "port": "4",
+                        "device": "of:0000000000000201"
+                    }
+                }
+            }
+        },
+        {
+            "action": "withdraw-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos"
+        }
+    ],
+    "actions": [
+        {
+            "action": "purge-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos"
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        }
+    ]
+}

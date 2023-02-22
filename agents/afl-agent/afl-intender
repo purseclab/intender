@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Figure out script absolute path
+pushd `dirname $0` > /dev/null
+BIN_DIR=`pwd`
+popd > /dev/null
+
+# Ensure that proxy is built
+if [ ! -f "$BIN_DIR/afl-proxy" ]; then
+  echo "The AFL proxy is not built! Make sure to run ./setup.sh or run 'make' in afl/" >&2
+  exit 2
+fi
+
+# Set defaults and parse options to override
+afl_log="/dev/null"
+local_run=0
+
+while getopts ":al" opt; do
+  case $opt in
+    /?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    a)
+      afl_log="proxy.log"
+      ;;
+    l)
+      local_run=1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+# Check positional arguments
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 [-a] INPUT_FILE" >&2
+  exit 1
+fi
+
+if [ $local_run -eq 1 ]; then
+    tmpdir=$(mktemp -d /tmp/ifuzzer/afl.XXX)
+    echo $tmpdir > "$BIN_DIR/pipe.txt"
+else
+    tmpdir="/tmp/ifuzzer"
+fi
+
+a2j="$tmpdir/a2j-pipe"
+j2a="$tmpdir/j2a-pipe"
+
+if [ $local_run -eq 1 ]; then
+    mkfifo "$a2j"
+    mkfifo "$j2a"
+fi
+
+input=$1
+echo $input > "$BIN_DIR/input.txt"
+
+# Run the proxy
+exec "$BIN_DIR/afl-proxy" $a2j $j2a $afl_log

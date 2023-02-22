@@ -1,0 +1,17 @@
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        }
+    ]
+}

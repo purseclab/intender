@@ -1,0 +1,20 @@
+{
+    "name": "h2h-intent-fattree",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 4
+        }
+    },
+    "actions": [
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,

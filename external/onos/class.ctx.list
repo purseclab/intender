@@ -1,0 +1,33 @@
+# REST (1)
+1 org/onosproject/rest/AbstractWebResource
+1 org/onosproject/rest/resources/IntentsWebResource
+1 org/onosproject/codec
+
+# Intent: common (2)
+2 org/onosproject/net/intent/impl
+2 org/onosproject/store/intent/impl
+
+# Intent: COMPILING (3)
+3 org/onosproject/net/intent/impl/phase/Compiling
+3 org/onosproject/net/intent/impl/compiler
+3 org/onosproject/net/intent/impl/CompilerRegistry
+3 org/onosproject/net/topology/impl
+
+# Intent: INSTALLING (4)
+4 org/onosproject/net/intent/impl/phase/Installing
+4 org/onosproject/net/intent/impl/installer
+4 org/onosproject/net/intent/impl/InstallCoordinator
+
+# Flow Objective (5)
+5 org/onosproject/net/flowobjective
+5 org/onosproject/store/flowobjective/impl
+5 org/onosproject/driver/pipeline
+
+# Flow Rule (6)
+6 org/onosproject/net/flow
+6 org/onosproject/store/flow/impl
+6 org/onosproject/provider/of/flow
+
+# SBI, core (7)
+7 org/onosproject/openflow/controller/driver
+7 org/onosproject/openflow/controller/impl

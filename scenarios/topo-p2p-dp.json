@@ -1,0 +1,56 @@
+{
+    "name": "topo-p2p",
+    "actions": [
+        {
+            "action": "create-topo",
+            "content": {
+                "controller": "onos",
+                "controllerIp": "127.0.0.1",
+                "configTopo": {
+                    "topo": "tree",
+                    "switch": 2,
+                    "host": 2,
+                    "_param": "_value"
+                }
+            }
+        },
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "PointToPointIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "ingressPoint": {
+                        "port": "2",
+                        "device": "of:0000000000000015"
+                    },
+                    "egressPoint": {
+                        "port": "3",
+                        "device": "of:0000000000000016"
+                    }
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "clear-intent"
+        },
+        {
+            "action": "delete-topo"
+        }
+    ]
+}

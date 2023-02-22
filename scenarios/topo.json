@@ -1,0 +1,41 @@
+{
+    "name": "del-topo",
+    "actions": [
+        {
+            "action": "create-topo",
+            "content": {
+                "controller": "onos",
+                "controllerIp": "127.0.0.1",
+                "topology": {
+                    "topo": "linear",
+                    "switch": 5,
+                    "host": 2,
+                    "_param": "_value"
+                }
+            }
+        },
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "46:E4:3C:A4:17:C8/-1",
+                    "two": "08:00:27:56:8a:15/-1"
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "delete-topo"
+        }
+    ]
+}

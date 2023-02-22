@@ -1,0 +1,39 @@
+{
+    "name": "h2h-intent-fattree",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 4
+        }
+    },
+    "actions": [
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "12:53:DA:18:0E:06/None",
+                    "two": "3A:7B:6F:E5:50:33/None"
+                }
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        }
+    ]
+}

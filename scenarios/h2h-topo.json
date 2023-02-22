@@ -1,0 +1,50 @@
+{
+    "name": "h2h-topo",
+    "topology": {
+        "controller": "onos",
+        "controllerIp": "127.0.0.1",
+        "configTopo": {
+            "topo": "fattree",
+            "switch": 2
+        }
+    },
+    "configActions": [
+        {
+            "action": "add-intent",
+            "content": {
+                "id": "A",
+                "controller": "onos",
+                "intent": {
+                    "type": "HostToHostIntent",
+                    "appId": "org.onosproject.null",
+                    "priority": 55,
+                    "one": "F2:1D:69:1D:81:60/None",
+                    "two": "F2:48:AC:9E:76:D2/None"
+                }
+            }
+        }
+    ],
+    "actions": [
+        {
+            "action": "add-host",
+            "content": {
+                "ipAddresses": ["10.0.83.227"],
+                "mac": "f2:1d:69:1d:81:60",
+                "dpid": "of:0000000000000202",
+                "port": "87"
+            }
+        },
+        {
+            "action": "cp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        },
+        {
+            "action": "dp-verify-intent",
+            "content": {
+                "intentId": "A"
+            }
+        }
+    ]
+}
